@@ -13,7 +13,7 @@ class Login extends ResourceController
     public function index()
     {
         $loginModel = new LoginModel();
-        $data['login'] = $loginModel->findAll();
+        $data['login'] = $loginModel->findAll(); //get all data
         return $this->respond($data);
     }
 }

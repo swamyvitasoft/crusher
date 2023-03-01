@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class LoginModel extends Model
 {
-    protected $table      = 'login';
+    protected $table      = 'login'; // table name
     protected $primaryKey = 'login_id';
     protected $allowedFields = ['role', 'name', 'email_id', 'password'];
 }
