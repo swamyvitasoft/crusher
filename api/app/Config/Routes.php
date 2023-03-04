@@ -40,6 +40,11 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->group('login/', static function ($routes) {
         $routes->get('index', 'Login::index');
     });
+    $routes->group('price/', static function ($routes) {
+        $routes->get('products', 'PriceList::products');
+        $routes->get('quantity', 'PriceList::quantity');
+        $routes->get('pricelist', 'PriceList::pricelist');
+    });
 });
 $routes->get('auth', 'Login::auth');
 
