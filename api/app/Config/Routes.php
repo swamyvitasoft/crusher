@@ -30,13 +30,13 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->group('login/', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
+$routes->group('login', ['filter' => ['AlreadyLoggedIn', 'cors']], function ($routes) {
     $routes->post('create', 'Login::create');
     $routes->post('check', 'Login::check');
 });
 $routes->get('login', 'Login::login');
 
-$routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
+$routes->group('/', ['filter' => ['AuthCheck','cors']], function ($routes) {
     $routes->group('login/', static function ($routes) {
         $routes->get('index', 'Login::index');
     });
