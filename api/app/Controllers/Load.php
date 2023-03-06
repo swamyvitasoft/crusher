@@ -26,12 +26,6 @@ class Load extends ResourceController
     public function save()
     {
         $validation = $this->validate([
-            'name' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Name is required.'
-                ],
-            ],
             'email_id' => [
                 'rules'  => 'required',
                 'errors' => [
@@ -67,6 +61,30 @@ class Load extends ResourceController
                 'errors' => [
                     'required' => 'Payment Type is required.'
                 ],
+            ],
+            'note' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Amount Details is required.'
+                ],
+            ],
+            'price' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Total Amount is required.'
+                ],
+            ],
+            'price1' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Paid Amount is required.'
+                ],
+            ],
+            'price2' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Due Amount is required.'
+                ],
             ]
         ]);
         if (!$validation) {
@@ -77,14 +95,19 @@ class Load extends ResourceController
                 'data' => []
             ];
         } else {
-            $login = [
-                'role' => "Customer",
-                'name' => $this->request->getVar("name"),
-                'email_id' => $this->request->getVar("email_id"),
-                'password' => Hash::make($this->request->getVar("email_id")),
-            ];
-            $this->loginModel->insert($login);
-            $customer_id = $this->loginModel->getInsertID();
+            $customer_info = $this->loginModel->where('email_id', $this->request->getVar("email_id"))->first();
+            if (!empty($customer_info)) {
+                $customer_id = $customer_info['login_id'];
+            } else {
+                $login = [
+                    'role' => "Customer",
+                    'name' => $this->request->getVar("name"),
+                    'email_id' => $this->request->getVar("email_id"),
+                    'password' => Hash::make($this->request->getVar("email_id")),
+                ];
+                $this->loginModel->insert($login);
+                $customer_id = $this->loginModel->getInsertID();
+            }
             $loads = [
                 'customer_id' => $customer_id,
                 'driver_name' => $this->request->getVar("driver_name"),

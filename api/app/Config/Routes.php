@@ -45,6 +45,9 @@ $routes->group('/', ['filter' => ['AuthCheck','cors']], function ($routes) {
         $routes->get('quantity', 'PriceList::quantity');
         $routes->get('pricelist', 'PriceList::pricelist');
     });
+    $routes->group('load/', static function ($routes) {
+        $routes->post('save', 'Load::save');
+    });
 });
 $routes->get('auth', 'Login::auth');
 
