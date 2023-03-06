@@ -33,6 +33,7 @@ $routes->get('/', 'Home::index');
 $routes->group('login', ['filter' => ['AlreadyLoggedIn', 'cors']], function ($routes) {
     $routes->post('create', 'Login::create');
     $routes->post('check', 'Login::check');
+    $routes->options('check', 'Login::check');
 });
 $routes->get('login', 'Login::login');
 
@@ -47,6 +48,9 @@ $routes->group('/', ['filter' => ['AuthCheck','cors']], function ($routes) {
     });
     $routes->group('load/', static function ($routes) {
         $routes->post('save', 'Load::save');
+    });
+    $routes->group('expens/', static function ($routes) {
+        $routes->post('save', 'Expenses::save');
     });
 });
 $routes->get('auth', 'Login::auth');
