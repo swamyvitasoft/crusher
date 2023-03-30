@@ -43,6 +43,9 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->group('dashboard/', static function ($routes) {
         $routes->get(Hash::path('index'), 'Dashboard::index');
     });
+    $routes->group('products/', static function ($routes) {
+        $routes->get(Hash::path('view'), 'Products::view');
+    });
 });
 /*
  * --------------------------------------------------------------------
