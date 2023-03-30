@@ -41,4 +41,41 @@ class Login extends BaseController
             exit;
         }
     }
+    public function check()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $validation = $this->validate([
+                'email_id' => [
+                    'rules'  => 'required|valid_email|is_not_unique[login.email_id]',
+                    'errors' => [
+                        'required' => 'Email ID is required.',
+                        'valid_email' => 'Email ID Incorrect Format.',
+                        'is_not_unique' => 'Email ID not registered in our server.'
+                    ],
+                ],
+                'password' => [
+                    'rules'  => 'required|min_length[5]|max_length[20]',
+                    'errors' => [
+                        'required' => 'Password is required.',
+                        'min_length' => 'Password must have atleast 5 characters in length.',
+                        'max_length' => 'Password must not have characters more thant 20 in length.',
+                    ],
+                ],
+            ]);
+            if (!$validation) {
+                return  redirect()->back()->with('validation', $this->validator)->withInput();
+            } else {
+                $email_id = $this->request->getPost('email_id');
+                $password = $this->request->getPost('password');
+                $logged_info = $this->loginModel->where('email_id', $email_id)->first();
+                $check_password = Hash::check($password, $logged_info['password']);
+                if (!$check_password) {
+                    return  redirect()->back()->with('fail', 'Incorect password.')->withInput();
+                } else {
+                    session()->set('LoggedData', $logged_info);
+                    return  redirect()->to('dashboard/' . Hash::path('index'));
+                }
+            }
+        }
+    }
 }

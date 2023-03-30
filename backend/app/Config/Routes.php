@@ -35,6 +35,7 @@ $routes->group('/', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
     $routes->get('', 'Login::login');
     $routes->get('login', 'Login::login');
     $routes->get('create', 'Login::create');
+    $routes->post('check', 'Login::check');
 });
 
 /*

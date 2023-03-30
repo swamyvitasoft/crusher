@@ -37,7 +37,7 @@
                     </div>
                     <div class="row mt-3">
                         <!-- Form -->
-                        <form class="col-12" id="loginform" action="<?= site_url() ?>login/check" method="post">
+                        <form class="col-12" id="loginform" action="<?= site_url() ?>check" method="post">
                             <?= csrf_field(); ?>
                             <?php if (!empty(session()->getFlashdata('fail'))) : ?>
                                 <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
