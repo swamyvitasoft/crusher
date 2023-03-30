@@ -12,6 +12,9 @@ use App\Libraries\Hash;
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url() ?>products/<?= Hash::path('view') ?>" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Products</span></a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url() ?>quantity/<?= Hash::path('view') ?>" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Quantity</span></a>
+                </li>
             </ul>
         </nav>
     </div>
