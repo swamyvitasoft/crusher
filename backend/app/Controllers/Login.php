@@ -78,4 +78,30 @@ class Login extends BaseController
             }
         }
     }
+    public function recover()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $validation = $this->validate([
+                'email_id' => [
+                    'rules'  => 'required|valid_email|is_not_unique[login.email_id]',
+                    'errors' => [
+                        'required' => 'Email ID is required.',
+                        'valid_email' => 'Email ID Incorrect Format.',
+                        'is_not_unique' => 'Email ID not registered in our server.'
+                    ],
+                ],
+            ]);
+            if (!$validation) {
+                return  redirect()->back()->with('validation', $this->validator)->withInput();
+            } else {
+                $email_id = $this->request->getPost('email_id');
+                $logged_info = $this->loginModel->where('email_id', $email_id)->first();
+                if (!$logged_info) {
+                    return  redirect()->back()->with('fail', 'Email ID Incorrect Format.')->withInput();
+                } else {
+                    return  redirect()->back()->with('success', 'Instructions sent your registered e-mail.')->withInput();
+                }
+            }
+        }
+    }
 }

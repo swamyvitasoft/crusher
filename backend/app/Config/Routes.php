@@ -38,6 +38,7 @@ $routes->group('/', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
     $routes->get('login', 'Login::login');
     $routes->get('create', 'Login::create');
     $routes->post('check', 'Login::check');
+    $routes->post('recover', 'Login::recover');
 });
 $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->group('dashboard/', static function ($routes) {
