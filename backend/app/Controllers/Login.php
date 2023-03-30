@@ -104,4 +104,11 @@ class Login extends BaseController
             }
         }
     }
+    public function logout()
+    {
+        if (session()->has('LoggedData')) {
+            session()->remove('LoggedData');
+            return  redirect()->to('login')->with('fail', 'You are now logged out.');
+        }
+    }
 }

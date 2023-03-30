@@ -51,6 +51,8 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
         $routes->get(Hash::path('view'), 'Quantity::view');
     });
 });
+$routes->get('logout', 'Login::logout');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
