@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Libraries\Hash;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -37,7 +39,11 @@ $routes->group('/', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
     $routes->get('create', 'Login::create');
     $routes->post('check', 'Login::check');
 });
-
+$routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
+    $routes->group('dashboard/', static function ($routes) {
+        $routes->get(Hash::path('index'), 'Dashboard::index');
+    });
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
