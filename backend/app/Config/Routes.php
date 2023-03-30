@@ -29,7 +29,12 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Login::login');
+// $routes->get('/', 'Login::index');
+
+$routes->group('/', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
+    $routes->get('', 'Login::login');
+    $routes->get('login', 'Login::login');
+});
 
 /*
  * --------------------------------------------------------------------
