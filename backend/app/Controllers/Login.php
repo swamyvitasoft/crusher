@@ -14,7 +14,11 @@ class Login extends BaseController
     }
     public function login()
     {
-        return view('login/index');
+        $data = [
+            'pageTitle' => 'Crusher Administrator | Login',
+            'logo' => site_url() . 'assets/images/logo.png'
+        ];
+        return view('login/index', $data);
     }
     public function create()
     {
