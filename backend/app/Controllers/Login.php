@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class Login extends BaseController
 {
-    public function index()
+    public function login()
     {
         return view('login/index');
     }
