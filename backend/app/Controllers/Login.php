@@ -111,4 +111,19 @@ class Login extends BaseController
             return  redirect()->to('login')->with('fail', 'You are now logged out.');
         }
     }
+    public function view()
+    {
+        $loggedInfo = session()->get('LoggedData');
+        $customerInfo = $this->loginModel->where('role', 'Customer')->get()->getResultArray();
+        $data = [
+            'pageTitle' => 'Crusher Administrator | Products',
+            'pageHeading' => 'Products',
+            'loggedInfo' => $loggedInfo,
+            'logo' => site_url() . 'assets/images/logo.png',
+            'customerInfo'  => $customerInfo
+        ];
+        return view('common/top', $data)
+            . view('login/view')
+            . view('common/bottom');
+    }
 }
