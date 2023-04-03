@@ -50,6 +50,9 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->group('quantity/', static function ($routes) {
         $routes->get(Hash::path('view'), 'Quantity::view');
     });
+    $routes->group('pricelist/', static function ($routes) {
+        $routes->get(Hash::path('view'), 'Pricelist::view');
+    });
 });
 $routes->get('logout', 'Login::logout');
 
