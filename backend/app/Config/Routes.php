@@ -58,6 +58,11 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
         $routes->get(Hash::path('add'), 'Booking::add');
         $routes->post(Hash::path('addAction'), 'Booking::addAction');
     });
+    $routes->group('expenses/', static function ($routes) {
+        $routes->get(Hash::path('view'), 'Expenses::view');
+        $routes->get(Hash::path('add'), 'Expenses::add');
+        $routes->post(Hash::path('addAction'), 'Expenses::addAction');
+    });
     $routes->group('customers/', static function ($routes) {
         $routes->get(Hash::path('view'), 'Login::view');
     });
