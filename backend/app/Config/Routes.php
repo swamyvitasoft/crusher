@@ -53,6 +53,11 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->group('pricelist/', static function ($routes) {
         $routes->get(Hash::path('view'), 'Pricelist::view');
     });
+    $routes->group('booking/', static function ($routes) {
+        $routes->get(Hash::path('view'), 'Booking::view');
+        $routes->get(Hash::path('add'), 'Booking::add');
+        $routes->post(Hash::path('addAction'), 'Booking::addAction');
+    });
 });
 $routes->get('logout', 'Login::logout');
 
