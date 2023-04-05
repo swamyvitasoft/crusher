@@ -27,6 +27,9 @@ use App\Libraries\Hash;
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url() ?>customers/<?= Hash::path('view') ?>" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Customers</span></a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url() ?>reports/<?= Hash::path('index') ?>/all" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Reports</span></a>
+                </li>
             </ul>
         </nav>
     </div>

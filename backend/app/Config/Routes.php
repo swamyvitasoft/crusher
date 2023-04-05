@@ -66,6 +66,9 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->group('customers/', static function ($routes) {
         $routes->get(Hash::path('view'), 'Login::view');
     });
+    $routes->group('reports/', static function ($routes) {
+        $routes->get(Hash::path('index') . '/(:any)', 'Reports::index/$1');
+    });
 });
 $routes->get('logout', 'Login::logout');
 
