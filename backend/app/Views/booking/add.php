@@ -90,7 +90,7 @@ use App\Libraries\Hash;
                                     </div>
                                     <div class="col-md-3 form-group mt-3 mt-md-0">
                                         <label for="price">Total Amount</label>
-                                        <input type="text" name="price" class="form-control" id="price" placeholder="Total Amount" value="<?= set_value('price') ?>">
+                                        <input type="text" name="price" class="form-control" id="price" placeholder="Total Amount" value="<?= set_value('price') ?>" readonly>
                                         <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'price') : '' ?></small>
                                     </div>
                                     <div class="col-md-3 form-group mt-3 mt-md-0">
@@ -100,7 +100,7 @@ use App\Libraries\Hash;
                                     </div>
                                     <div class="col-md-3 form-group mt-3 mt-md-0">
                                         <label for="price2">Due Amount</label>
-                                        <input type="text" name="price2" class="form-control" id="price2" placeholder="Due Amount" value="<?= set_value('price2') ?>">
+                                        <input type="text" name="price2" class="form-control" id="price2" placeholder="Due Amount" value="<?= set_value('price2') ?>" readonly>
                                         <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'price2') : '' ?></small>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@ use App\Libraries\Hash;
 <script src="<?= site_url() ?>assets/libs/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#price').on('blur', function(e) {
+        $('#quantity').on('blur', function(e) {
             var quantity = $("#quantity").val();
             var product = $("#product").val();
             var pricelist = <?= json_encode($pricelistInfo) ?>;

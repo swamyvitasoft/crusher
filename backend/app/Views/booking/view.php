@@ -2,7 +2,6 @@
 
 use App\Libraries\Hash;
 use App\Models\PaymentsModel;
-use App\Models\PricelistModel;
 
 ?>
 <div class="preloader">

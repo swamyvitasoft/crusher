@@ -57,6 +57,7 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
         $routes->get(Hash::path('view'), 'Booking::view');
         $routes->get(Hash::path('add'), 'Booking::add');
         $routes->post(Hash::path('addAction'), 'Booking::addAction');
+        $routes->get(Hash::path('print'), 'Booking::print');
     });
     $routes->group('expenses/', static function ($routes) {
         $routes->get(Hash::path('view'), 'Expenses::view');

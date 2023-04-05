@@ -167,11 +167,33 @@ class Booking extends BaseController
                 'login_id' => $this->loggedInfo['login_id'],
             ];
             $query = $this->paymentsModel->insert($payments);
+            $payment_id = $this->paymentsModel->getInsertID();
         }
         if (!$query) {
             return  redirect()->back()->with('fail', 'Something went wrong Input Data.')->withInput();
         } else {
-            return  redirect()->to('booking/' . Hash::path('view'))->with('success', 'Congratulation. Load Booked');
+            return  redirect()->to('booking/' . Hash::path('print'))->with('input', array('load_id' => $load_id, 'payment_id' => $payment_id));
         }
+    }
+
+    public function print()
+    {
+        $input = session()->getFlashdata('input');
+        if (empty($input)) {
+            return  redirect()->to('booking/' . Hash::path('add'))->with('success', 'Book your Load First')->withInput();
+        }
+        $booking = $this->bookingModel->where('load_id', $input['load_id'])->findAll();
+        $payments = $this->paymentsModel->where('payment_id', $input['payment_id'])->findAll();
+        $data = [
+            'pageTitle' => 'Crusher Administrator | Booking',
+            'pageHeading' => 'Booking',
+            'loggedInfo' => $this->loggedInfo,
+            'logo' => site_url() . 'assets/images/logo.png',
+            'booking' => $booking,
+            'payments' => $payments
+        ];
+        return view('common/top', $data)
+            . view('booking/print')
+            . view('common/bottom');
     }
 }
