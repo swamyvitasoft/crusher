@@ -8,5 +8,5 @@ class QuantityModel extends Model
 {
     protected $table      = 'quantity'; // table name
     protected $primaryKey = 'id';
-    protected $allowedFields = ['quantity'];
+    protected $allowedFields = ['quantity','login_id'];
 }
