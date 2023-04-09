@@ -8,5 +8,5 @@ class ProductsModel extends Model
 {
     protected $table      = 'products'; // table name
     protected $primaryKey = 'id';
-    protected $allowedFields = ['product'];
+    protected $allowedFields = ['product','login_id'];
 }
