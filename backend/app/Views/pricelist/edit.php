@@ -3,7 +3,7 @@
 use App\Libraries\Hash;
 
 foreach ($pricelistInfo as $row) :
-    if ($price_id != 0) {
+    if ($price_id == $row['price_id']) {
         $pricelistRow = $row;
     }
 endforeach;
@@ -13,7 +13,7 @@ endforeach;
         <form action="<?= site_url() ?>pricelist/<?= Hash::path('addAction') ?>" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
             <div class="form-group mt-3">
                 <label for="product">Product</label>
-                <select class="form-control" name="product" id="product">
+                <select class="form-control product" name="product" id="product">
                     <option selected disabled>Product</option>
                     <?php
                     foreach ($productsInfo as $key => $row) {
@@ -26,12 +26,13 @@ endforeach;
                     <?php
                     }
                     ?>
+                    <option value="product" class="text-primary">Add Product</option>
                 </select>
                 <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'product') : '' ?></small>
             </div>
             <div class="form-group mt-3">
                 <label for="quantity">Quantity</label>
-                <select class="form-control" name="quantity" id="quantity">
+                <select class="form-control quantity" name="quantity" id="quantity">
                     <option selected disabled>Quantity</option>
                     <?php
                     foreach ($quantityInfo as $key => $row) {
@@ -44,6 +45,7 @@ endforeach;
                     <?php
                     }
                     ?>
+                    <option value="quantity" class="text-primary">Add Quantity</option>
                 </select>
                 <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'quantity') : '' ?></small>
             </div>
@@ -61,3 +63,17 @@ endforeach;
     </div>
 </div>
 <script src="<?= site_url() ?>assets/libs/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(document).on("change", ".product", function(e) {
+            var data = $(this).val();
+            if (data == "product")
+                location.replace("<?= site_url() ?>products/<?= Hash::path('view') ?>/0");
+        });
+        $(document).on("change", ".quantity", function(e) {
+            var data = $(this).val();
+            if (data == "quantity")
+                location.replace("<?= site_url() ?>quantity/<?= Hash::path('view') ?>/0");
+        });
+    });
+</script>

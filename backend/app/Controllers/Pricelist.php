@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Hash;
 use App\Models\PricelistModel;
 use App\Models\ProductsModel;
 use App\Models\QuantityModel;
@@ -78,7 +79,7 @@ class Pricelist extends BaseController
         if (!$query) {
             return  redirect()->back()->with('fail', 'Something went wrong Input Data.')->withInput();
         } else {
-            return  redirect()->back()->with('success', 'Congratulations! Record Efected');
+            return  redirect()->to('pricelist/' . Hash::path('view') . '/0')->with('success', 'Congratulations! Record Efected');
         }
     }
     public function delete($price_id = 0)
