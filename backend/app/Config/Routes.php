@@ -45,10 +45,14 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
         $routes->get(Hash::path('index'), 'Dashboard::index');
     });
     $routes->group('products/', static function ($routes) {
-        $routes->get(Hash::path('view'), 'Products::view');
+        $routes->get(Hash::path('view') . '/(:any)', 'Products::view/$1');
+        $routes->post(Hash::path('addAction'), 'Products::addAction');
+        $routes->get(Hash::path('delete') . '/(:any)', 'Products::delete/$1');
     });
     $routes->group('quantity/', static function ($routes) {
-        $routes->get(Hash::path('view'), 'Quantity::view');
+        $routes->get(Hash::path('view') . '/(:any)', 'Quantity::view/$1');
+        $routes->post(Hash::path('addAction'), 'Quantity::addAction');
+        $routes->get(Hash::path('delete') . '/(:any)', 'Quantity::delete/$1');
     });
     $routes->group('pricelist/', static function ($routes) {
         $routes->get(Hash::path('view') . '/(:any)', 'Pricelist::view/$1');
