@@ -2,8 +2,6 @@
 
 use App\Libraries\Hash;
 use App\Models\PaymentsModel;
-use App\Models\PricelistModel;
-
 ?>
 <div class="preloader">
     <div class="lds-ripple">
@@ -27,8 +25,31 @@ use App\Models\PricelistModel;
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" id="find" class="btn btn-cyan btn-sm rounded text-white find" value='{"find" :"2023-04-03"}'> Day </button>
-                            <button type="button" id="find" class="btn btn-cyan btn-sm rounded text-white find" value='{"find" :"04"}'> Month </button>
+                            <div class="row">
+                                <div class="col-md-2 form-group">
+                                    <input type="date" class="form-control date" value="<?= date('Y-m-d', strtotime($find)) ?>" name="find" id="find">
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <input type="month" class="form-control month" value="<?= date('Y-m', strtotime($find)) ?>" name="find" id="find">
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <select class="form-control year" name="year" id="year">
+                                        <?php
+                                        for ($i = 2021; $i < 2031; $i++) {
+                                            $find1 = date('Y', strtotime($find));
+                                            if ($find1 == $i) {
+                                                $selected = 'selected';
+                                            } else {
+                                                $selected = '';
+                                            }
+                                        ?>
+                                            <option value="<?= $i ?>" <?= $selected ?>><?= $i ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                             <?= csrf_field(); ?>
                             <?php if (!empty(session()->getFlashdata('fail'))) : ?>
                                 <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
@@ -38,7 +59,7 @@ use App\Models\PricelistModel;
                         </div>
                         <div class="card-body">
                             <div class="adv-table">
-                                <table id="zero_config" class="table table-striped table-bordered w-100 d-md-table">
+                                <table id="zero_config1" class="table table-striped table-bordered w-100 d-md-table">
                                     <thead>
                                         <tr>
                                             <th>Vehicle</th>
@@ -145,11 +166,21 @@ use App\Models\PricelistModel;
 <script src="<?= site_url() ?>assets/libs/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $(document).on("click", ".find", function(e) {
-            var data = $(this);
-            var values = JSON.parse(data.val());
-            var find = values.find;
-            location.replace("<?= site_url() ?>reports/<?= Hash::path('index') ?>/" + find);
+        $('#zero_config1').DataTable({
+            'responsive': true,
+            'searching': false
+        });
+        $(document).on("change", ".date", function(e) {
+            var date = $(this).val();
+            location.replace("<?= site_url() ?>reports/<?= Hash::path('index') ?>/" + date);
+        });
+        $(document).on("change", ".month", function(e) {
+            var month = $(this).val();
+            location.replace("<?= site_url() ?>reports/<?= Hash::path('index') ?>/" + month);
+        });
+        $(document).on("change", ".year", function(e) {
+            var year = $(this).val();
+            location.replace("<?= site_url() ?>reports/<?= Hash::path('index') ?>/" + year);
         });
     });
 </script>

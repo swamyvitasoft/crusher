@@ -28,10 +28,18 @@ class Reports extends BaseController
     {
         if ($find == "all") {
             $bookingInfo = $this->bookingModel->findAll();
+            $find = date('Y-m-d');
         } else {
-            $bookingInfo = $this->bookingModel->where("DATE_FORMAT(load_date,'%Y-%m-%d')", $find)->findAll();
-            if(! $bookingInfo){
-                $bookingInfo = $this->bookingModel->where("DATE_FORMAT(load_date,'%m')", $find)->findAll();
+            $find1 = explode("-", $find);
+            if (count($find1) == 1) {
+                $bookingInfo = $this->bookingModel->where("DATE_FORMAT(load_date,'%Y')", $find)->findAll();
+                $find = $find . '-01';
+            }
+            if (count($find1) == 2) {
+                $bookingInfo = $this->bookingModel->where("DATE_FORMAT(load_date,'%Y-%m')", $find)->findAll();
+            }
+            if (count($find1) == 3) {
+                $bookingInfo = $this->bookingModel->where("DATE_FORMAT(load_date,'%Y-%m-%d')", $find)->findAll();
             }
         }
         $data = [
@@ -39,7 +47,8 @@ class Reports extends BaseController
             'pageHeading' => 'Reports',
             'loggedInfo' => $this->loggedInfo,
             'logo' => site_url() . 'assets/images/logo.png',
-            'bookingInfo'  => $bookingInfo
+            'bookingInfo'  => $bookingInfo,
+            'find'  => $find
         ];
         return view('common/top', $data)
             . view('reports/index')
