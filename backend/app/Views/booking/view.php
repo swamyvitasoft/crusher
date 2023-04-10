@@ -87,10 +87,6 @@ use App\Models\PaymentsModel;
                                                         ?>
                                                     </table>
                                                 </td>
-                                                <!-- <td>
-                                                    <button type="button" id="edit" class="btn btn-cyan btn-sm rounded text-white edit" value='{"id" :"<?= $row['load_id'] ?>"}'> Edit </button>
-                                                    <button type="button" class="btn btn-danger btn-sm rounded text-white delete" value='{"id" :"<?= $row['load_id'] ?>"}'> Delete </button>
-                                                </td> -->
                                             </tr>
                                         <?php
                                         endforeach;

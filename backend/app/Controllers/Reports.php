@@ -54,4 +54,79 @@ class Reports extends BaseController
             . view('reports/index')
             . view('common/bottom');
     }
+    public function payment($load_id = 0)
+    {
+        $paymentsInfo = $this->paymentsModel->where("load_id", $load_id)->select('customer_id,load_id,total_amount,sum(payment_today) as payment_today,sum(due_amount) as due_amount')->findAll();
+        $data = [
+            'pageTitle' => 'Crusher Administrator | Payments',
+            'pageHeading' => 'Payments',
+            'loggedInfo' => $this->loggedInfo,
+            'logo' => site_url() . 'assets/images/logo.png',
+            'paymentsInfo'  => $paymentsInfo
+        ];
+        return view('common/top', $data)
+            . view('reports/payment')
+            . view('common/bottom');
+    }
+    public function paymentAction()
+    {
+        $validation = $this->validate([
+            'remain' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Remain is required.'
+                ],
+            ],
+            'payment_type' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Payment Type is required.'
+                ],
+            ],
+            'note' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Amount Details is required.'
+                ],
+            ],
+            'price' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Total Amount is required.'
+                ],
+            ],
+            'price1' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Paid Amount is required.'
+                ],
+            ],
+            'price2' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Due Amount is required.'
+                ],
+            ]
+        ]);
+        if (!$validation) {
+            return  redirect()->back()->with('validation', $this->validator)->withInput();
+        } else {
+            $payments = [
+                'customer_id' => $this->request->getPost("customer_id"),
+                'load_id'   => $this->request->getPost("load_id"),
+                'payment_type' => $this->request->getPost("payment_type"),
+                'note' => $this->request->getPost("note"),
+                'total_amount' => $this->request->getPost("price"),
+                'payment_today' => $this->request->getPost("price1"),
+                'due_amount' => $this->request->getPost("price2"),
+                'login_id' => $this->loggedInfo['login_id'],
+            ];
+            $query = $this->paymentsModel->insert($payments);
+            if (!$query) {
+                return  redirect()->back()->with('fail', 'Something went wrong Input Data.')->withInput();
+            } else {
+                return  redirect()->back()->with('success', 'Payment Done Success.');
+            }
+        }
+    }
 }

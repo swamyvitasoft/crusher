@@ -64,6 +64,7 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
         $routes->get(Hash::path('add'), 'Booking::add');
         $routes->post(Hash::path('addAction'), 'Booking::addAction');
         $routes->get(Hash::path('print'), 'Booking::print');
+        $routes->get(Hash::path('loadPrint') . '/(:any)', 'Booking::loadPrint/$1');
     });
     $routes->group('expenses/', static function ($routes) {
         $routes->get(Hash::path('view'), 'Expenses::view');
@@ -75,6 +76,8 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
     });
     $routes->group('reports/', static function ($routes) {
         $routes->get(Hash::path('index') . '/(:any)', 'Reports::index/$1');
+        $routes->get(Hash::path('payment') . '/(:any)', 'Reports::payment/$1');
+        $routes->post(Hash::path('paymentAction'), 'Reports::paymentAction');
     });
 });
 $routes->get('logout', 'Login::logout');

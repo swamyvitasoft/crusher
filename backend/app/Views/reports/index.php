@@ -71,6 +71,7 @@ use App\Models\PaymentsModel;
                                             <th>Paid</th>
                                             <th>Due</th>
                                             <th>Date</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -89,7 +90,7 @@ use App\Models\PaymentsModel;
                                                 <td><?= $row['price'] ?> </td>
                                                 <?php
                                                 $paymentsModel = new PaymentsModel();
-                                                $paymentsInfo = $paymentsModel->where('load_id', $row['load_id'])->get()->getResult();
+                                                $paymentsInfo = $paymentsModel->where('load_id', $row['load_id'])->orderBy('payment_id', 'ASC')->get()->getResult();
                                                 ?>
                                                 <td>
                                                     <table>
@@ -124,10 +125,10 @@ use App\Models\PaymentsModel;
                                                 <td><?= $payment_today ?></td>
                                                 <td><?= $due_amount ?></td>
                                                 <td><?= date("d-m-Y H:m:i", strtotime($row['load_date'])); ?> </td>
-                                                <!-- <td>
-                                                    <button type="button" id="edit" class="btn btn-cyan btn-sm rounded text-white edit" value='{"id" :"<?= $row['load_id'] ?>"}'> Edit </button>
-                                                    <button type="button" class="btn btn-danger btn-sm rounded text-white delete" value='{"id" :"<?= $row['load_id'] ?>"}'> Delete </button>
-                                                </td> -->
+                                                <td>
+                                                    <button type="button" id="payment" class="btn btn-primary btn-sm rounded text-white payment" value='{"load_id" :"<?= $row['load_id'] ?>"}'> Payment </button>
+                                                    <button type="button" id="print" class="btn btn-cyan btn-sm rounded text-white print" value='{"load_id" :"<?= $row['load_id'] ?>"}'> Print </button>
+                                                </td>
                                             </tr>
                                         <?php
                                         endforeach;
@@ -144,6 +145,7 @@ use App\Models\PaymentsModel;
                                             <th>Paid</th>
                                             <th>Due</th>
                                             <th>Date</th>
+                                            <th></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -181,6 +183,18 @@ use App\Models\PaymentsModel;
         $(document).on("change", ".year", function(e) {
             var year = $(this).val();
             location.replace("<?= site_url() ?>reports/<?= Hash::path('index') ?>/" + year);
+        });
+        $(document).on("click", ".payment", function(e) {
+            var data = $(this);
+            var values = JSON.parse(data.val());
+            var load_id = values.load_id;
+            location.replace("<?= site_url() ?>reports/<?= Hash::path('payment') ?>/" + load_id);
+        });
+        $(document).on("click", ".print", function(e) {
+            var data = $(this);
+            var values = JSON.parse(data.val());
+            var load_id = values.load_id;
+            location.replace("<?= site_url() ?>booking/<?= Hash::path('loadPrint') ?>/" + load_id);
         });
     });
 </script>

@@ -85,6 +85,8 @@ use App\Libraries\Hash;
                                         <select class="form-control" name="payment_type" id="payment_type">
                                             <option selected disabled>Payment Type</option>
                                             <option value="Cash">Cash</option>
+                                            <option value="Transfer">Transfer</option>
+                                            <option value="Cheque">Cheque</option>
                                         </select>
                                         <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'payment_type') : '' ?></small>
                                     </div>
@@ -109,7 +111,7 @@ use App\Libraries\Hash;
                                     <textarea class="form-control" name="note" id="note" rows="7" placeholder="Note"><?= set_value('note') ?></textarea>
                                     <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'note') : '' ?></small>
                                 </div>
-                                <div class="text-center"><button type="submit">Save</button></div>
+                                <div class="text-center"><button type="submit" class="btn btn-success">Save</button></div>
                             </form>
                         </div>
                     </div>

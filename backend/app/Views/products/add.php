@@ -10,7 +10,10 @@ use App\Libraries\Hash;
                 <input type="text" class="form-control" name="product" id="product" placeholder="Product" value="<?= set_value('product') ?>">
                 <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'product') : '' ?></small>
             </div>
-            <div class="text-center"><button type="submit" class="btn btn-success">Save</button></div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Save</button>
+                <a href="<?= site_url() ?>pricelist/<?= Hash::path('view') ?>/0"><button type="button" class="btn btn-primary">Back</button></a>
+            </div>
         </form>
     </div>
 </div>

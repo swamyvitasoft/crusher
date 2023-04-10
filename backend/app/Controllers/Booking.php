@@ -190,7 +190,25 @@ class Booking extends BaseController
             'loggedInfo' => $this->loggedInfo,
             'logo' => site_url() . 'assets/images/logo.png',
             'booking' => $booking,
-            'payments' => $payments
+            'payments' => $payments,
+            'print' => 'load'
+        ];
+        return view('common/top', $data)
+            . view('booking/print')
+            . view('common/bottom');
+    }
+    public function loadPrint($load_id = 0)
+    {
+        $booking = $this->bookingModel->where('load_id', $load_id)->findAll();
+        $payments = $this->paymentsModel->where('load_id', $load_id)->orderBy('payment_id', 'ASC')->findAll();
+        $data = [
+            'pageTitle' => 'Crusher Administrator | Booking',
+            'pageHeading' => 'Booking',
+            'loggedInfo' => $this->loggedInfo,
+            'logo' => site_url() . 'assets/images/logo.png',
+            'booking' => $booking,
+            'payments' => $payments,
+            'print' => 'print'
         ];
         return view('common/top', $data)
             . view('booking/print')
