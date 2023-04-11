@@ -32,7 +32,7 @@ class Dashboard extends BaseController
         $today_pending = 0;
         if (!empty($pending1)) {
             foreach ($pending1 as $row) {
-                $paymentsInfo = $this->paymentsModel->where('load_id', $row['load_id'])->orderBy('payment_id', 'DESC')->get()->getResult();
+                $paymentsInfo = $this->paymentsModel->where('load_id', $row['load_id'])->orderBy('payment_id', 'DESC')->findAll();
                 $due_amount = $paymentsInfo[0]['due_amount'];
                 $today_pending = $today_pending + $due_amount;
             }
