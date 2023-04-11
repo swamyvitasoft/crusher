@@ -78,6 +78,7 @@ $routes->group('/', ['filter' => 'AuthCheck'], function ($routes) {
         $routes->get(Hash::path('index') . '/(:any)', 'Reports::index/$1');
         $routes->get(Hash::path('payment') . '/(:any)', 'Reports::payment/$1');
         $routes->post(Hash::path('paymentAction'), 'Reports::paymentAction');
+        $routes->get(Hash::path('customer') . '/(:any)', 'Reports::customer/$1');
     });
 });
 $routes->get('logout', 'Login::logout');
