@@ -68,7 +68,7 @@ use App\Libraries\Hash;
                                     <input type="text" name="amount" class="form-control" id="amount" placeholder="Amount" value="<?= set_value('amount') ?>">
                                     <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'amount') : '' ?></small>
                                 </div>
-                                <div class="text-center"><button type="submit">Save</button></div>
+                                <div class="text-center"><button type="submit" class="btn btn-primary">Save</button></div>
                             </form>
                         </div>
                     </div>
