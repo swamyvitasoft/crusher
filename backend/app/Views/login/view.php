@@ -21,7 +21,11 @@
                     <div class="card">
                         <div class="card-head">
                             <?= csrf_field(); ?>
-                            <?php if (!empty(session()->getFlashdata('fail'))) : ?>
+                            <?php
+
+                            use App\Libraries\Hash;
+
+                            if (!empty(session()->getFlashdata('fail'))) : ?>
                                 <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
                             <?php elseif (!empty(session()->getFlashdata('success'))) : ?>
                                 <div class="alert alert-success"><?= session()->getFlashdata('success'); ?></div>
@@ -34,7 +38,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Phone Number</th>
-                                            <!-- <th></th> -->
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,10 +48,9 @@
                                             <tr>
                                                 <td><?= $row['name'] ?></td>
                                                 <td><?= $row['email_id'] ?></td>
-                                                <!-- <td>
-                                                    <button type="button" id="edit" class="btn btn-cyan btn-sm rounded text-white edit" value='{"id" :"<?= $row['login_id'] ?>"}'> Edit </button>
-                                                    <button type="button" class="btn btn-danger btn-sm rounded text-white delete" value='{"id" :"<?= $row['login_id'] ?>"}'> Delete </button>
-                                                </td> -->
+                                                <td>
+                                                    <button type="button" id="view" class="btn btn-cyan btn-sm rounded text-white view" value='{"customer_id" :"<?= $row['login_id'] ?>"}'> View </button>
+                                                </td>
                                             </tr>
                                         <?php
                                         endforeach;
@@ -57,7 +60,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Phone Number</th>
-                                            <!-- <th></th> -->
+                                            <th></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -70,3 +73,14 @@
     </div>
     <?= view('common/footer') ?>
 </div>
+<script src="<?= site_url() ?>assets/libs/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(document).on("click", ".view", function(e) {
+            var data = $(this);
+            var values = JSON.parse(data.val());
+            var customer_id = values.customer_id;
+            location.replace("<?= site_url() ?>reports/<?= Hash::path('customer') ?>/" + customer_id);
+        });
+    });
+</script>

@@ -116,8 +116,8 @@ class Login extends BaseController
         $loggedInfo = session()->get('LoggedData');
         $customerInfo = $this->loginModel->where('role', 'Customer')->get()->getResultArray();
         $data = [
-            'pageTitle' => 'Crusher Administrator | Products',
-            'pageHeading' => 'Products',
+            'pageTitle' => 'Crusher Administrator | Customers',
+            'pageHeading' => 'Customers',
             'loggedInfo' => $loggedInfo,
             'logo' => site_url() . 'assets/images/logo.png',
             'customerInfo'  => $customerInfo
