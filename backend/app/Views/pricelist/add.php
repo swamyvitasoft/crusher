@@ -37,7 +37,7 @@ use App\Libraries\Hash;
             </div>
             <div class="form-group mt-3">
                 <label for="price">Price</label>
-                <input type="text" class="form-control" name="price" id="price" placeholder="Price" value="<?= set_value('price') ?>">
+                <input type="number" class="form-control" name="price" id="price" placeholder="Price" value="<?= set_value('price') ?>" min="1">
                 <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'price') : '' ?></small>
             </div>
             <div class="text-center"><button type="submit" class="btn btn-success">Save</button></div>

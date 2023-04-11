@@ -70,6 +70,10 @@ class Pricelist extends BaseController
                 'price' => $this->request->getPost("price"),
                 'login_id' => $this->loggedInfo['login_id']
             ];
+            $paymentsInfo = $this->pricelistModel->where(["product" => $this->request->getPost("product"),"quantity" => $this->request->getPost("quantity")])->findAll();
+            if(!empty($paymentsInfo)){
+                return  redirect()->back()->with('fail', 'Product and Quantity Already added')->withInput();
+            }
             if ($this->request->getPost("price_id")) {
                 $query = $this->pricelistModel->update($this->request->getPost("price_id"), $pricelist);
             } else {
