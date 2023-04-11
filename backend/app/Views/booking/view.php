@@ -41,7 +41,7 @@ use App\Models\PaymentsModel;
                                 <table id="zero_config" class="table table-striped table-bordered w-100 d-md-table">
                                     <thead>
                                         <tr>
-                                            <th>Driver</th>
+                                            <th>Load Number</th>
                                             <th>Vehicle</th>
                                             <th>Product</th>
                                             <th>Quantity</th>
@@ -54,7 +54,7 @@ use App\Models\PaymentsModel;
                                         foreach ($bookingInfo as $row) :
                                         ?>
                                             <tr>
-                                                <td><?= $row['driver_name'] ?> </td>
+                                                <td>CMS<?= $row['load_id'] ?> </td>
                                                 <td><?= $row['vehicle_no'] ?> </td>
                                                 <td><?= $row['product'] ?> m</td>
                                                 <td><?= $row['quantity'] ?> cft</td>
@@ -94,7 +94,7 @@ use App\Models\PaymentsModel;
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>Driver</th>
+                                            <th>Load Number</th>
                                             <th>Vehicle</th>
                                             <th>Product</th>
                                             <th>Quantity</th>

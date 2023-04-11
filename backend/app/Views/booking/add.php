@@ -92,17 +92,17 @@ use App\Libraries\Hash;
                                     </div>
                                     <div class="col-md-3 form-group mt-3 mt-md-0">
                                         <label for="price">Total Amount</label>
-                                        <input type="text" name="price" class="form-control" id="price" placeholder="Total Amount" value="<?= set_value('price') ?>" readonly>
+                                        <input type="number" name="price" class="form-control" id="price" placeholder="Total Amount" value="<?= set_value('price') ?>" min="1" readonly>
                                         <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'price') : '' ?></small>
                                     </div>
                                     <div class="col-md-3 form-group mt-3 mt-md-0">
                                         <label for="price1">Paid Amount</label>
-                                        <input type="text" name="price1" class="form-control" id="price1" placeholder="Paid Amount" value="<?= set_value('price1') ?>">
+                                        <input type="number" name="price1" class="form-control" id="price1" placeholder="Paid Amount" value="<?= set_value('price1') ?>" min="1">
                                         <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'price1') : '' ?></small>
                                     </div>
                                     <div class="col-md-3 form-group mt-3 mt-md-0">
                                         <label for="price2">Due Amount</label>
-                                        <input type="text" name="price2" class="form-control" id="price2" placeholder="Due Amount" value="<?= set_value('price2') ?>" readonly>
+                                        <input type="number" name="price2" class="form-control" id="price2" placeholder="Due Amount" value="<?= set_value('price2') ?>" min="1" readonly>
                                         <small class="text-danger"><?= !empty(session()->getFlashdata('validation')) ? display_error(session()->getFlashdata('validation'), 'price2') : '' ?></small>
                                     </div>
                                 </div>
@@ -131,14 +131,23 @@ use App\Libraries\Hash;
             $.each(pricelist, function(index, row) {
                 if (quantity == row['quantity'] && product == row['product']) {
                     $("#price").val(row['price']);
+                    return false;
+                } else {
+                    $("#price").val(0);
                 }
             });
         });
         $('#price1').on('blur', function(e) {
             var price = $("#price").val();
             var price1 = $("#price1").val();
-            var price2 = price - price1;
-            $("#price2").val(price2);
+            if (parseInt(price1) > parseInt(price)) {
+                alert("Total Amount Greaterthan to Paid Amount");
+                $("#price2").val(0);
+                $("#price1").val(0);
+            } else {
+                var price2 = price - price1;
+                $("#price2").val(price2);
+            }
         });
     });
 </script>

@@ -13,7 +13,7 @@ use App\Libraries\Hash;
                 <p style="margin:0">admin@gmail.com</p>
             </div>
             <div class="float-end">
-                <h5>Load Number: CRUSHER<?= $booking[0]['load_id'] ?></h5>
+                <h5>Load Number: CMS<?= $booking[0]['load_id'] ?></h5>
                 <h6>Driver Name: <?= $booking[0]['driver_name'] ?></h6>
                 <h6>Date: <?= $booking[0]['load_date'] ?></h6>
             </div>
@@ -78,7 +78,7 @@ use App\Libraries\Hash;
                     <p style="margin:0">admin@gmail.com</p>
                 </div>
                 <div class="float-end">
-                    <h5>Load Number: CRUSHER<?= $booking[0]['load_id'] ?></h5>
+                    <h5>Load Number: CMS<?= $booking[0]['load_id'] ?></h5>
                     <h6>Driver Name: <?= $booking[0]['driver_name'] ?></h6>
                     <h6>Date: <?= $booking[0]['load_date'] ?></h6>
                 </div>
