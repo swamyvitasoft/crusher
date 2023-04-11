@@ -25,31 +25,6 @@ use App\Models\PaymentsModel;
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-2 form-group">
-                                    <input type="date" class="form-control date" value="<?= date('Y-m-d', strtotime($find)) ?>" name="find" id="find">
-                                </div>
-                                <div class="col-md-2 form-group">
-                                    <input type="month" class="form-control month" value="<?= date('Y-m', strtotime($find)) ?>" name="find" id="find">
-                                </div>
-                                <div class="col-md-2 form-group">
-                                    <select class="form-control year" name="year" id="year">
-                                        <?php
-                                        for ($i = 2021; $i < 2031; $i++) {
-                                            $find1 = date('Y', strtotime($find));
-                                            if ($find1 == $i) {
-                                                $selected = 'selected';
-                                            } else {
-                                                $selected = '';
-                                            }
-                                        ?>
-                                            <option value="<?= $i ?>" <?= $selected ?>><?= $i ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
                             <?= csrf_field(); ?>
                             <?php if (!empty(session()->getFlashdata('fail'))) : ?>
                                 <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>

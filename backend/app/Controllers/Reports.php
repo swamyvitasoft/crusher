@@ -125,8 +125,22 @@ class Reports extends BaseController
             if (!$query) {
                 return  redirect()->back()->with('fail', 'Something went wrong Input Data.')->withInput();
             } else {
-                return  redirect()->back()->with('success', 'Payment Done Success.');
+                return  redirect()->to('reports/' . Hash::path('index') . '/all')->with('success', 'Payment Done Success.');
             }
         }
+    }
+    public function customer($customer_id = 0)
+    {
+        $bookingInfo = $this->bookingModel->where("customer_id", $customer_id)->findAll();
+        $data = [
+            'pageTitle' => 'Crusher Administrator | Customer',
+            'pageHeading' => 'Customer',
+            'loggedInfo' => $this->loggedInfo,
+            'logo' => site_url() . 'assets/images/logo.png',
+            'bookingInfo'  => $bookingInfo
+        ];
+        return view('common/top', $data)
+            . view('reports/customer')
+            . view('common/bottom');
     }
 }
